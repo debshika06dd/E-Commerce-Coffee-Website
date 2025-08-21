@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Gateway</title>
+    <link rel="stylesheet" href="style.css"> <!-- Link to your existing CSS -->
+    <style>
+        body {
+            background: #f9f9f9;
+            font-family: Arial, sans-serif;
+        }
+
+        .payment-container {
+            max-width: 600px;
+            background: #fff;
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .payment-container h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .payment-methods {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .payment-methods button {
+            flex: 1;
+            padding: 10px;
+            margin: 0 5px;
+            background-color: #eee;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        /* .payment-methods button.active {
+            background-color: #ffa500;
+            color: white;
+        } */
+
+         .payment-methods button:hover {
+            background-color: #ffa500;
+            color: white;
+        }
+
+        .payment-methods button.selected {
+            background-color: #ffa500;
+            border-color: white;
+        }
+
+        .payment-form {
+            display: none;
+        }
+
+        .payment-form.active {
+            display: block;
+        }
+
+        .payment-form input {
+            width: 100%;
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .pay-btn {
+            width: 100%;
+            padding: 12px;
+            background: #28a745;
+            color: white;
+            border: none;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .pay-btn:hover {
+            background: #218838;
+        }
+
+        .message {
+            text-align: center;
+            padding: 10px;
+            margin-top: 20px;
+        }
+
+        .success {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .password-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .password-popup .popup-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .popup-content input {
+            width: 80%;
+            padding: 10px;
+            margin: 15px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .popup-content button {
+            padding: 10px;
+            background: #28a745;
+            color: white;
+            border: none;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Payment Success Modal */
+        .payment-success-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .payment-success-modal .modal-content {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .payment-success-modal .modal-content h2 {
+            color: #28a745;
+        }
+
+        .payment-success-modal .modal-content p {
+            font-size: 16px;
+            color: #333;
+        }
+
+        .payment-success-modal .modal-content button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #28a745;
+            color: white;
+            border: none;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .payment-success-modal .modal-content button:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
+
+
+    <div class="payment-container">
+        <h2>Select Payment Method</h2>
+
+        <div class="payment-methods">
+            <button id="upi-btn" class="active">UPI</button>
+            <button id="creditcard-btn">Credit Card</button>
+            <button id="card-btn">Debit Card</button>
+            <button id="netbanking-btn">Net Banking</button>
+        </div>
+
+        
+
+        <!-- UPI Form -->
+        <form id="upi-form" class="payment-form active" method="POST">
+            <input  type="text" placeholder="Enter UPI ID (example@bank)" id="upi-id"  required>
+            <input  type="text" id="amount-upi" placeholder="Amount"  required>
+            <input  type="email" id="email" name="email" required placeholder="Enter your email address" />
+            <button type="button" class="pay-btn" id="pay-now-btn">Proceed to Pay</button>
+        </form>
+
+        <!-- Credit Card Form -->
+        <form id="creditcard-form" class="payment-form">
+            <input type="text" placeholder="Cardholder Name" required>
+            <input type="text" placeholder="Credit Card Number" required>
+            <input type="text" placeholder="Expiry Date (MM/YY)" required>
+            <input type="text" placeholder="CVV" required>
+            <input type="text" id="amount-card" placeholder="Amount" required>
+            <button type="button" class="pay-btn" id="creditcard-pay-btn">Proceed to Pay</button>
+        </form>
+
+        <!-- Debit Card Form -->
+        <form id="card-form" class="payment-form">
+            <input type="text" placeholder="Cardholder Name" required>
+            <input type="text" placeholder="Card Number" required>
+            <input type="text" placeholder="Expiry Date (MM/YY)" required>
+            <input type="text" placeholder="CVV" required>
+            <input type="text" id="amount-card-debit" placeholder="Amount" required>
+            <button type="button" class="pay-btn" id="debitcard-pay-btn">Proceed to Pay</button>
+        </form>
+
+        <!-- Net Banking Form -->
+        <form id="netbanking-form" class="payment-form">
+            <select required style="width:100%; margin-bottom:15px; padding:10px; border:1px solid #ccc; border-radius:5px;">
+                <option value="">Select Bank</option>
+                <option value="sbi">State Bank of India</option>
+                <option value="hdfc">HDFC Bank</option>
+                <option value="icici">ICICI Bank</option>
+                <option value="axis">Axis Bank</option>
+            </select>
+            <input type="text" id="amount-netbanking" placeholder="Amount" required>
+            <button type="button" class="pay-btn" id="netbanking-pay-btn">Proceed to Pay</button>
+        </form>
+
+        <!-- Payment Status Message -->
+        <div id="payment-status" class="message" style="display: none;"></div>
+    </div>
+
+    <!-- Password Popup -->
+    <div id="password-popup" class="password-popup">
+        <div class="popup-content">
+            <h3>Enter Password to Complete Payment</h3>
+            <input type="password" id="payment-password" placeholder="Enter Password" required>
+            <button id="confirm-password-btn">Confirm Payment</button>
+            <br><br>
+            <button id="close-password-popup" style="background: #dc3545;">Close</button> <!-- 🔴 Close button -->
+        </div>
+    </div>
+
+    <!-- Payment Success Modal -->
+    <div id="payment-success-modal" class="payment-success-modal">
+        <div class="modal-content">
+            <h2>Payment Successful</h2>
+            <p>Your payment has been processed successfully.</p>
+            <button id="close-modal-btn">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Elements
+        const upiBtn = document.getElementById('upi-btn');
+        const creditCardBtn = document.getElementById('creditcard-btn');
+        const debitCardBtn = document.getElementById('card-btn');
+        const netBankingBtn = document.getElementById('netbanking-btn');
+
+        const upiForm = document.getElementById('upi-form');
+        const creditCardForm = document.getElementById('creditcard-form');
+        const debitCardForm = document.getElementById('card-form');
+        const netBankingForm = document.getElementById('netbanking-form');
+
+        const payNowBtn = document.getElementById('pay-now-btn');
+        const creditcardPayBtn = document.getElementById('creditcard-pay-btn');
+        const debitcardPayBtn = document.getElementById('debitcard-pay-btn');
+        const netbankingPayBtn = document.getElementById('netbanking-pay-btn');
+
+        const passwordPopup = document.getElementById('password-popup');
+        const confirmPasswordBtn = document.getElementById('confirm-password-btn');
+        const paymentPassword = document.getElementById('payment-password');
+        const paymentSuccessModal = document.getElementById('payment-success-modal');
+        const closeModalBtn = document.getElementById('close-modal-btn');
+
+        // Payment Method Buttons Click Handler
+        function togglePaymentForms(paymentMethod) {
+            const forms = [upiForm, creditCardForm, debitCardForm, netBankingForm];
+            forms.forEach(form => form.classList.remove('active'));
+
+            switch (paymentMethod) {
+                case 'upi':
+                    upiForm.classList.add('active');
+                    selectedPaymentMethod = 'UPI';
+                    break;
+                case 'creditcard':
+                    creditCardForm.classList.add('active');
+                    selectedPaymentMethod = 'Credit Card';
+                    break;
+                case 'debitcard':
+                    debitCardForm.classList.add('active');
+                    selectedPaymentMethod = 'Debit Card';
+                    break;
+                case 'netbanking':
+                    netBankingForm.classList.add('active');
+                    selectedPaymentMethod = 'Net Banking';
+                    break;
+            }
+        }
+
+        upiBtn.addEventListener('click', () => togglePaymentForms('upi'));
+        creditCardBtn.addEventListener('click', () => togglePaymentForms('creditcard'));
+        debitCardBtn.addEventListener('click', () => togglePaymentForms('debitcard'));
+        netBankingBtn.addEventListener('click', () => togglePaymentForms('netbanking'));
+
+
+        // Handle "Pay Now" click and Password validation
+//         payNowBtn.addEventListener('click', () => {
+//             passwordPopup.style.display = 'flex';
+// });
+
+        payNowBtn.addEventListener('click', () => {
+            const upiId = document.getElementById('upi-id').value.trim();
+            const amount = document.getElementById('amount-upi').value.trim();
+            const email = document.getElementById('email').value.trim();
+
+            if (upiId && amount && email) {
+                passwordPopup.style.display = 'flex';
+            } else {
+                alert("Please fill in all UPI payment details.");
+        }
+});
+
+//     creditcardPayBtn.addEventListener('click', () => {
+//         passwordPopup.style.display = 'flex';
+// });
+    
+
+    creditcardPayBtn.addEventListener('click', () => {
+            const inputs = creditCardForm.querySelectorAll('input');
+            const allFilled = Array.from(inputs).every(input => input.value.trim() !== "");
+
+            if (allFilled) {
+                passwordPopup.style.display = 'flex';
+            } else {
+                alert("Please fill in all Credit Card details.");
+    }
+});
+
+        // debitcardPayBtn.addEventListener('click', () => {
+        //     passwordPopup.style.display = 'flex';  // Show password popup
+        // });
+        debitcardPayBtn.addEventListener('click', () => {
+            const inputs = debitCardForm.querySelectorAll('input');
+            const allFilled = Array.from(inputs).every(input => input.value.trim() !== "");
+
+            if (allFilled) {
+                passwordPopup.style.display = 'flex';
+            } else {
+                alert("Please fill in all debit card details.");
+    }
+});
+
+        // netbankingPayBtn.addEventListener('click', () => {
+        //     passwordPopup.style.display = 'flex';  // Show password popup
+        // });
+        netbankingPayBtn.addEventListener('click', () => {
+            const bankSelect = netBankingForm.querySelector('select').value;
+            const amount = document.getElementById('amount-netbanking').value.trim();
+
+            if (bankSelect && amount) {
+                passwordPopup.style.display = 'flex';
+            } else {
+                alert("Please select a bank and enter the amount.");
+    }
+});
+
+        confirmPasswordBtn.addEventListener('click', () => {
+            if (paymentPassword.value === '1234') {  // Validate password
+
+                 localStorage.setItem("paymentStatus", "success");
+
+                // Hide the password popup
+                passwordPopup.style.display = 'none';
+
+                // Show payment success modal
+                paymentSuccessModal.style.display = 'flex';
+                
+
+                // Prepare order details
+                const orderDetails = {
+                    orderId: 'ORD12345',  // You can generate a dynamic order ID here
+                    amount: document.getElementById('amount-upi').value,
+                    paymentMethod: 'UPI',  // Set based on the selected payment method
+                };
+
+                const userEmail = document.getElementById('email').value;
+
+                    setTimeout(() => {
+                    paymentSuccessModal.style.display = 'none';
+                    window.location.href = 'index.html';  // Redirect to main page after success
+                }, 3000);
+                
+            } else {
+                alert('Incorrect password.');
+                 localStorage.setItem("paymentStatus", "failed");
+            }
+
+            
+        });
+
+        closeModalBtn.addEventListener('click', () => {
+            paymentSuccessModal.style.display = 'none';
+        });
+
+
+        const paymentButtons = document.querySelectorAll('.payment-methods button');
+
+        paymentButtons.forEach(button => {
+            button.addEventListener('click', () => {
+            // Remove 'selected' class from all buttons
+            paymentButtons.forEach(btn => btn.classList.remove('selected'));
+
+            // Add 'selected' class to the clicked button
+            button.classList.add('selected');
+    });
+});
+
+        const closePasswordPopupBtn = document.getElementById('close-password-popup');
+
+        closePasswordPopupBtn.addEventListener('click', () => {
+        passwordPopup.style.display = 'none';
+        localStorage.setItem("paymentStatus", "cancelled");
+    });
+
+
+    
+    
+
+
+
+    </script>
+</body>
+</html>
