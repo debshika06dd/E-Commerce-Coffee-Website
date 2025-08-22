@@ -12,7 +12,7 @@ A simple, responsive online coffee store built using HTML, CSS, and JavaScript. 
 + **CSS3** - Styling of the Website.
 + **JavaScript** - Interactivity and dynamic content.
 #
-#**Glimpses of the Website**
+**Glimpses of the Website**
 <img width="1366" height="727" alt="first" src="https://github.com/user-attachments/assets/d3d14c45-3b1c-4320-b49a-b151987f6732" />
 <img width="1366" height="616" alt="second" src="https://github.com/user-attachments/assets/0990cb31-d9af-4f4e-b8a3-6054355a4e5a" />
 <img width="1366" height="638" alt="third" src="https://github.com/user-attachments/assets/5e15a59b-087a-4ff8-8657-2403f22f77c5" />
