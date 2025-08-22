@@ -1,16 +1,16 @@
 # ☕ E-Commerce-Coffee-Website
-#A simple, responsive online coffee store built using HTML, CSS, and JavaScript. Users can browse coffee products, view details, and explore the store in a user-friendly interface.
+A simple, responsive online coffee store built using HTML, CSS, and JavaScript. Users can browse coffee products, view details, and explore the store in a user-friendly interface.
 #
-# **Features**
-#+ Display a variety of coffee products with images, descriptions, and prices.
-#+ Interactive product cards with hover effects.
-#+ Easy-to-navigate layout with sections like Home, Products, About, and Contact.
-#+ Simple and clean user interface with modern styling.
+ **Features**
++ Display a variety of coffee products with images, descriptions, and prices.
++ Interactive product cards with hover effects.
++ Easy-to-navigate layout with sections like Home, Products, About, and Contact.
++ Simple and clean user interface with modern styling.
 #
-#**Technologies Used**
-#+ **HTML5** - Structure of the Website.
-#+ **CSS3** - Styling of the Website.
-#+ **JavaScript** - Interactivity and dynamic content.
+**Technologies Used**
++ **HTML5** - Structure of the Website.
++ **CSS3** - Styling of the Website.
++ **JavaScript** - Interactivity and dynamic content.
 #
 #**Glimpses of the Website**
 <img width="1366" height="727" alt="first" src="https://github.com/user-attachments/assets/d3d14c45-3b1c-4320-b49a-b151987f6732" />
@@ -30,7 +30,7 @@
 <img width="1359" height="643" alt="15" src="https://github.com/user-attachments/assets/9392fc48-3e42-48b6-9457-affa6c114ac7" />
 <img width="1365" height="687" alt="16" src="https://github.com/user-attachments/assets/4769171d-93d8-471e-a545-7d6ccd8b8dfd" />
 #
-#**Website live at:** 
+**Website live at:**  https://debshika06dd.github.io/E-Commerce-Coffee-Website/
 
 
 
