@@ -1,5 +1,5 @@
 # ☕ E-Commerce-Coffee-Website
-A simple, responsive online coffee store built using HTML, CSS, and JavaScript. Users can browse coffee products, view details, and explore the store in a user-friendly interface.
+*A simple, responsive online coffee store built using HTML, CSS, and JavaScript. Users can browse coffee products, view details, and explore the store in a user-friendly interface.*
 #
  **Features**
 + Display a variety of coffee products with images, descriptions, and prices.
