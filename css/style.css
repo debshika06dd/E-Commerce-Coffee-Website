@@ -48,6 +48,8 @@ section{
     padding: 2rem 7%;
 
 }
+button{
+    border-radius: 50%;
 
 .heading{
     text-align: center;
@@ -926,4 +928,5 @@ section{
     html{
         font-size: 50%;
     }
+
 }
