@@ -40,7 +40,8 @@ let products = [
     { id: 8, name: 'Cappuccino', price: 230, image: '../images/Cappuccino.jpg' },
     { id: 9, name: 'Latte', price: 230, image: '../images/Latte.jpg' },
     { id: 10, name: 'Americano', price: 210, image: '../images/Americano.jpg' },
-    { id: 11, name: 'Cold brew', price: 220, image: '../images/Cold Brew.jpg' }
+    { id: 11, name: 'Cold brew', price: 250, image: '../images/Cold Brew.jpg' },
+    { id: 12, name: 'Indian Filter Coffee', price: 80, image: '../images/Indian Filter Coffee.jpg' }
 ];
 
 // Cart array to hold the added products
@@ -203,7 +204,7 @@ function updateCartDisplay() {
 
         // Create and append the product name, quantity, price, and remove button
         let nameSpan = document.createElement('span');
-        nameSpan.textContent = `${item.name} x ₹${item.quantity}`;
+        nameSpan.textContent = `${item.name} x ${item.quantity}`;
         itemDiv.appendChild(nameSpan);
 
         let priceSpan = document.createElement('span');
