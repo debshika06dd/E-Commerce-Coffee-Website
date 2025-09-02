@@ -46,6 +46,7 @@ body{
 
 section{
     padding: 2rem 7%;
+
 }
 
 .heading{
@@ -54,6 +55,7 @@ section{
     text-transform: uppercase;
     padding-bottom: 3.rem;
     font-size: 4rem;
+    margin-bottom: 20px;
 }
 
 .heading span{
@@ -62,7 +64,6 @@ section{
 }
 
 .btn{
-    border-radius: 50%;
     margin-top: 1rem;
     display: inline-block;
     padding: .9rem 3rem;
@@ -70,6 +71,7 @@ section{
     color: #fff;
     background: var(--main-color);
     cursor: pointer;
+    border-radius: 10px;
 }
 
 .btn:hover{
@@ -245,6 +247,7 @@ section{
     align-items: center;
     background: var(--black);
     flex-wrap: wrap;
+    border-radius: 10px;
 }
 
 .about .row .image{
@@ -282,10 +285,12 @@ section{
     padding: 5rem;
     text-align: center;
     border: var(--border);
+    border-radius: 10px;
 }
 
 .menu .box-container .box img{
     height: 10rem;
+    border-radius: 10px;
 }
 
 .menu .box-container .box h3{
@@ -294,7 +299,7 @@ section{
     padding: 1rem 0;
 }
 
-.menu .box-container .box price{
+.menu .box-container .box .price{
     color: #fff;
     font-size: 2.5rem;
     padding: .5rem 0;
@@ -324,7 +329,16 @@ section{
     text-align: center;
     border: var(--border);
     padding: 2rem;
+    border-radius: 10px;
 }
+
+/* .products .box-container .box:hover{
+    background: #fff;
+}
+
+.products .box-container .box .product-name .price:hover > *{
+    color: var(--black);
+} */
 
 .products .box-container .box .icons a{
     height: 5rem;
@@ -334,6 +348,7 @@ section{
     border: var(--border);
     color:#fff;
     margin: .3rem;
+    border-radius: 10px;
 }
 
 .products .box-container .box .icons a:hover{
@@ -346,6 +361,7 @@ section{
 
 .products .box-container .box .image img{
     height: 25rem;
+    border-radius: 10px;    
 }
 
 .products .box-container .box .content h3{
@@ -382,6 +398,7 @@ section{
     border: var(--border);
     text-align: center;
     padding: 3rem 2rem;
+    border-radius: 10px;
 }
 
 .review .box-container .box p{
@@ -415,24 +432,28 @@ section{
     background: var(--black);
     flex-wrap: wrap;
     gap: 1rem;
+    border-radius: 10px;
 }
 
 .contact .row .map{
     flex: 1 1 45rem;
     width: 100%;
     object-fit: cover;
+    border-radius: 10px;
 }
 
 .contact .row .form{
     flex:1 1 45rem;
     padding: 5rem 2rem;
     text-align: center;
+    border-radius: 10px;
 }
 
 .contact .row form h3{
     text-transform: uppercase;
     font-size:3.5rem;
     color: #fff;
+    border-radius: 10px;
 }
 
 
@@ -443,6 +464,7 @@ section{
     margin-bottom: 2rem;
     background: var(--bg);
     border: var(--border);
+    border-radius: 10px;
 }
 
 .contact .row form .inputBox span{
@@ -458,6 +480,7 @@ section{
     color: #fff;
     text-transform: none;
     background: none;
+    border-radius: 10px;
 }
 
 .contact .row form .inputBox input,
@@ -486,6 +509,7 @@ section{
         z-index: 1000;
         border-radius: 10px;
         text-align: center;
+        border-radius: 10px;
     }
 
       .popup-card h3 {
@@ -509,10 +533,12 @@ section{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
     gap:1.5rem;
+    border-radius: 10px;
 }
 
 .blogs .box-container .box{
     border: var(--border);
+    border-radius: 10px;
 }
 
 .blogs .box-container .box .image{
@@ -622,6 +648,7 @@ section{
     color: #fff;
     background: var(--main-color);
     cursor: pointer;
+    border-radius: 10px;
 }
 
 .add-to-cart:hover{
@@ -926,10 +953,4 @@ section{
     html{
         font-size: 50%;
     }
-
 }
-
-
-
-
-
